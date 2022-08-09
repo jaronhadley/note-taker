@@ -31,7 +31,8 @@ const getNotes = () =>
     headers: {
       'Content-Type': 'application/json',
     },
-  });
+  })
+
 
 const saveNote = (note) =>
   fetch('/api/notes', {
@@ -48,6 +49,7 @@ const deleteNote = (id) =>
     headers: {
       'Content-Type': 'application/json',
     },
+    //body: {"note_id":id}
   });
 
 const renderActiveNote = () => {
@@ -83,12 +85,12 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   const note = e.target;
-  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).title;
 
   if (activeNote.id === noteId) {
     activeNote = {};
   }
-
+  //console.log(noteId)
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -153,7 +155,7 @@ const renderNoteList = async (notes) => {
 
     return liEl;
   };
-
+  console.log(jsonNotes)
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi('No saved Notes', false));
   }
