@@ -3,4 +3,4 @@
 
 ![note taker page](/assets/notehome.png)
 
-![Note Taker App](https://shrouded-chamber-64747.herokuapp.com)
+[Note Taker App](https://shrouded-chamber-64747.herokuapp.com)
