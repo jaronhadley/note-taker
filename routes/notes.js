@@ -6,15 +6,17 @@ const {
   writeToFile,
 } = require('../helpers/fsUtils');
 
+console.log(__dirname);
+
 // GET Route for retrieving all the notes
 notes.get('/notes', (req, res) => {
-  readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
+  readFromFile('/db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 // GET Route for a specific note
 notes.get('/notes/:note_id', (req, res) => {
   const noteId = req.params.note_id;
-  readFromFile('../db/db.json')
+  readFromFile('/db/db.json')
     .then((data) => JSON.parse(data))
     .then((json) => {
       const result = json.filter((note) => note.id === noteId);
@@ -27,13 +29,13 @@ notes.get('/notes/:note_id', (req, res) => {
 // DELETE Route for a specific note
 notes.delete('/notes/:note_id', (req, res) => {
     const noteId = req.params.note_id;
-  readFromFile('../db/db.json')
+  readFromFile('/db/db.json')
     .then((data) => JSON.parse(data))
     .then((json) => {
       // Make a new array of all tips except the one with the ID provided in the URL
       const result = json.filter((note) => note.id != noteId);
       // Save that array to the filesystem
-      writeToFile('../db/db.json', result);
+      writeToFile('/db/db.json', result);
 
       // Respond to the DELETE request
       res.json(`Item ${noteId} has been deleted 🗑️`);
@@ -53,7 +55,7 @@ notes.post('/notes', (req, res) => {
       text
     };
 
-    readAndAppend(newNote, '../db/db.json');
+    readAndAppend(newNote, '/db/db.json');
     res.json(`Note added successfully 🚀`);
   } else {
     res.error('Error in adding note');
