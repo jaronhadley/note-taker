@@ -5,7 +5,7 @@ const api = require('./routes/notes.js');
 const PORT = process.env.PORT || 3001;
 
 const app = express();
-
+console.log(__dirname );
 
 
 // Middleware for parsing JSON and urlencoded form data
